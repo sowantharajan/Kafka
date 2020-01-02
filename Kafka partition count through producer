@@ -1,0 +1,20 @@
+How to get Kafka partition count through producer 
+
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.TopicPartition;
+
+public class TestClass {
+	public static void main(String[] args) throws Exception {
+	Properties configProperties = new Properties();
+	configProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"10.55.173.36:9092,10.55.173.37:9092,10.55.173.38:9092,10.55.173.40:9092");
+	configProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.ByteArraySerializer");
+	configProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
+
+	org.apache.kafka.clients.producer.Producer producer = new KafkaProducer(configProperties);
+	//producer.partitionsFor("emsCsvDA");
+	System.out.println("partitionsFor: "+producer.partitionsFor("iotin").size());
+	
+}
+}
